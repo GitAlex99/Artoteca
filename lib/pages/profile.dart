@@ -1,5 +1,3 @@
-import 'package:cherry_v_1_0_1/lateralMenu/profile.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Profile extends StatefulWidget {
@@ -10,99 +8,224 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  String? email = FirebaseAuth.instance.currentUser?.email;
+  List<String> imageUrls = [
+    'https://placeimg.com/640/480/animals',
+    'https://placeimg.com/640/480/arch',
+    'https://placeimg.com/640/480/nature',
+    'https://placeimg.com/640/480/people',
+    'https://placeimg.com/640/480/tech',
+    'https://placeimg.com/640/480/animals',
+    'https://placeimg.com/640/480/arch',
+    'https://placeimg.com/640/480/nature',
+    'https://placeimg.com/640/480/people',
+    'https://placeimg.com/640/480/tech',
+    'https://placeimg.com/640/480/nature',
+    'https://placeimg.com/640/480/people',
+    'https://placeimg.com/640/480/tech',
+    'https://placeimg.com/640/480/animals',
+    'https://placeimg.com/640/480/arch',
+    'https://placeimg.com/640/480/nature',
+    'https://placeimg.com/640/480/people',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
-      endDrawer: LateralBarProfile(),
       body: ListView(
-        padding : EdgeInsets.zero,
-          children: <Widget>[
-            buildTop(),
-            buildContent(),
-      ]
-    ),
-    );
-  }
-  Widget buildCoverImage(){
-    return Container(
-      color: Colors.grey,
-      child: Image.asset(
-          "assets/sfondo.jpg",
-        width: double.infinity,
-        height: 230,
-        fit: BoxFit.cover,
-      ),
-    );
-  }
-
-  Widget buildProfileImage(){
-    return CircleAvatar(
-      radius: 70,
-      backgroundColor: Colors.grey.shade800,
-      backgroundImage: ExactAssetImage(
-        "assets/fotoProfilo.jpg",
-      ),
-    );
-  }
-
-  Widget buildTop(){
-    return Stack(
-      clipBehavior: Clip.none,
-      alignment: Alignment.center,
-      children: [
-        Container(
-          margin: EdgeInsets.only(bottom: 85),
-            child: buildCoverImage()),
-        Positioned(
-          top: 170,
-          child: buildProfileImage(),
-        )
-      ],
-    );
-  }
-
-  Widget buildContent(){
-    return Column(
-      children: [
-        const SizedBox(height: 8),
-        Text(
-          email!,
-          style: TextStyle(fontSize: 15, color: Colors.black, fontWeight: FontWeight.bold),
-        ),
-        const SizedBox(height: 8),
-        aboutMe(),
-      ],
-    );
-  }
-
-  Widget aboutMe(){
-    return Column(
-      children: [
-        Text(
-            "About me:"
-        ),
-        const SizedBox(height: 16),
-        Container(
-
-            child: Text(
-                "My name is Magela Cadenas, I was born in Montevideo, Uruguay, 1969. At the age of 13 I moved with my family to Sweden where I finished my nine-year compulsory school. One year later I started to travel. For several years I had the opportunity to travel a lot and I enjoyed visiting news countries and learning about their cultures.Before I turned back to Sweden, in 1993, I worked as sale manager for the English Institute Kerto S.A, in Uruguay and Chile for a couple of years. I enjoyed this job there I learned a lot and gained huge experience in the sales area."
+        children: <Widget>[
+          SizedBox(height: 30),
+          Container(
+              height: 130,
+              child: CircleAvatar(
+                radius: 61,
+                backgroundColor: Colors.white,
+                child: CircleAvatar(
+                  radius: 60,
+                  backgroundImage: ExactAssetImage("assets/ragazza.jpg"),
+                ),
+              )
+          ),
+          SizedBox(height: 30),
+          Container(
+            child: Center(
+              child: Text("Jude",
+                style: TextStyle( fontSize: 30),
+              ),
             ),
-        ),
-        SizedBox(height: 20,),
-        MaterialButton(
-          onPressed: (){
-            FirebaseAuth.instance.signOut();
-          },
-          color: Colors.blue,
-          child: Text('sign out'),
-        )
-      ]
+          ),
+          Container(
+            child: Center(
+              child: Text("Painter",
+                style: TextStyle( fontSize: 15,fontStyle: FontStyle.italic),
+              ),
+            ),
+          ),
+          SizedBox(height: 35),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Column(
+                children: <Widget>[
+                  Text("58",
+                      style: TextStyle(fontSize: 20)
+                  ),
+                  Text("POSTS",
+                    style: TextStyle(fontSize: 15,fontStyle: FontStyle.italic),
+                  ),
+                ],
+              ),
+              SizedBox(width: 40),
+              Column(
+                children: <Widget>[
+                  Text("25.643",
+                      style: TextStyle(fontSize: 20)
+                  ),
+                  Text("FOLLOWERS",
+                    style: TextStyle(fontSize: 15,fontStyle: FontStyle.italic),
+                  ),
+                ],
+              ),
+              SizedBox(width: 40),
+              Column(
+                children: <Widget>[
+                  Text("564",
+                      style: TextStyle(fontSize: 20)
+                  ),
+                  Text("FOLLOWING",
+                    style: TextStyle(fontSize: 15,fontStyle: FontStyle.italic),
+                  ),
+                ],
+              ),
+            ],
+          ),
+          SizedBox(height: 35),
+          Center(
+            child: Container(
+              width: 300,
+              child: FloatingActionButton.extended(
+                onPressed: () {},
+                backgroundColor: Colors.blue,
+                label: Text("Follow"),
+              ),
+            ),
+          ),
+          SizedBox(height: 30),
+          GridView.count(
+              mainAxisSpacing: 10,
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              crossAxisCount: 3,
+              childAspectRatio: 1.0,
+              children: <Widget>[
+                Container(
+                  height: 20,
+                    child: Image.asset("assets/quadri/q1.jpeg")
+                ),
+                Container(
+                    height: 20,
+                    child: Image.asset("assets/quadri/q2.jpeg")
+                ),
+                Container(
+                    height: 20,
+                    child: Image.asset("assets/quadri/q3.jpeg")
+                ),
+                Container(
+                    height: 20,
+                    child: Image.asset("assets/quadri/q5.jpeg")
+                ),
+                Container(
+                    height: 20,
+                    child: Image.asset("assets/quadri/q4.jpeg")
+                ),
+                Container(
+                    height: 20,
+                    child: Image.asset("assets/quadri/q6.jpeg")
+                ),
+                Container(
+                    height: 20,
+                    child: Image.asset("assets/quadri/q8.jpeg")
+                ),
+                Container(
+                    height: 20,
+                    child: Image.asset("assets/quadri/q9.jpeg")
+                ),
+                Container(
+                    height: 20,
+                    child: Image.asset("assets/quadri/q10.jpeg")
+                ),
+                Container(
+                    height: 20,
+                    child: Image.asset("assets/quadri/q11.jpeg")
+                ),
+                Container(
+                    height: 20,
+                    child: Image.asset("assets/quadri/q12.jpeg")
+                ),
+                Container(
+                    height: 20,
+                    child: Image.asset("assets/quadri/q13.jpeg")
+                ),
+                Container(
+                    height: 20,
+                    child: Image.asset("assets/quadri/q14.jpeg")
+                ),
+                Container(
+                    height: 20,
+                    child: Image.asset("assets/quadri/q2.jpeg")
+                ),
+                Container(
+                    height: 20,
+                    child: Image.asset("assets/quadri/q3.jpeg")
+                ),
+                Container(
+                    height: 20,
+                    child: Image.asset("assets/quadri/q1.jpeg")
+                ),
+                Container(
+                    height: 20,
+                    child: Image.asset("assets/quadri/q6.jpeg")
+                ),
+                Container(
+                    height: 20,
+                    child: Image.asset("assets/quadri/q5.jpeg")
+                ),
+                Container(
+                    height: 20,
+                    child: Image.asset("assets/quadri/q4.jpeg")
+                ),
+                Container(
+                    height: 20,
+                    child: Image.asset("assets/quadri/q8.jpeg")
+                ),
+                Container(
+                    height: 20,
+                    child: Image.asset("assets/quadri/q9.jpeg")
+                ),
+                Container(
+                    height: 20,
+                    child: Image.asset("assets/quadri/q7.jpeg")
+                ),
+                Container(
+                    height: 20,
+                    child: Image.asset("assets/quadri/q11.jpeg")
+                ),
+                Container(
+                    height: 20,
+                    child: Image.asset("assets/quadri/q12.jpeg")
+                ),
+                Container(
+                    height: 20,
+                    child: Image.asset("assets/quadri/q10.jpeg")
+                ),
+                Container(
+                    height: 20,
+                    child: Image.asset("assets/quadri/q14.jpeg")
+                ),
+              ]
+          ),
+        ],
+      ),
     );
   }
 }
